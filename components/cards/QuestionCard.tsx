@@ -57,7 +57,7 @@ const QuestionCard = ({
           value={author.name}
           title={`-asked ${getTimestamp(createdAt)}`}
           href={`/profile/${author._id}`}
-          isAuthor
+          isAuthor={author.name}
           textStyles="small-medium text-dark400_light700"
         />
         <Metric
@@ -65,6 +65,7 @@ const QuestionCard = ({
           alt="Upvotes"
           value={formatAndDivideNumber(upvotes)}
           title="Votes"
+          isAuthor={author.name}
           textStyles="small-medium text-dark400_light800"
         />
         <Metric
@@ -72,6 +73,7 @@ const QuestionCard = ({
           alt="message"
           value={answers.length}
           title="Answers"
+          isAuthor={author.name}
           textStyles="small-medium text-dark400_light800"
         />
         <Metric
@@ -79,6 +81,7 @@ const QuestionCard = ({
           alt="eye"
           value={formatAndDivideNumber(views)}
           title="Votes"
+          isAuthor={author.name}
           textStyles="small-medium text-dark400_light800"
         />
       </div>
