@@ -17,7 +17,7 @@ export async function getQuestions(params: GetQuestionsParams) {
       .sort({ createdAt: -1 });
     return { questions };
   } catch (error) {
-    console.log(error);
+    console.error("Error in getQuestions:", error);
     throw error;
   }
 }
