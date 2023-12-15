@@ -9,22 +9,22 @@ import { revalidatePath } from "next/cache";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
 
     const questions = await Question.find({})
       .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User })
-      .sort({createdAt:-1});
+      .sort({ createdAt: -1 });
     return { questions };
   } catch (error) {
-    console.log(error);
+    console.error("Error in getQuestions:", error);
     throw error;
   }
 }
 
 export async function createQuestion(params: CreateQuestionParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { title, content, tags, author, path } = params;
 
     const question = await Question.create({
@@ -50,10 +50,8 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     // create an interaction record for the user's ask question action
     // increment authors reputation by+5
-    console.log(params);
-    if (path) {
-      revalidatePath(path);
-    }
+
+    revalidatePath(path);
   } catch (error) {
     console.log(error);
     console.error("Error in createQuestion:", error);
